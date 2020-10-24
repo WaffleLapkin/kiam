@@ -1,0 +1,11 @@
+; (made just for fun)
+
+grammar = part *("," line) *1("," "_" "=>" expr) *1","
+
+line    = ["let" pat "="] expr "=>" expr
+
+; compiler defined
+pat     = ""
+
+; compiler defined
+expr    = ""
