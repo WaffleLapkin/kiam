@@ -130,6 +130,7 @@ mod tests {
         }
 
         // won't work with if/elseif/else
+        #[allow(clippy::eq_op)]
         let r = when! {
             Struct { x: 0 } == Struct { x: 1 } => 0,
             Struct { x: 22 } == Struct { x: 22 } => 1,
