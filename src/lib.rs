@@ -1,8 +1,8 @@
-//! This crate entroduces `when!` macro which provides better syntax for 
+//! This crate entroduces `when!` macro which provides better syntax for
 //! `if`/`else if`/`else` chains. The syntax is similar to `match`.
 //!
 //! (idea is borrowed from [kotlin][kt-when-expr])
-//! 
+//!
 //! [kt-when-expr]: https://kotlinlang.org/docs/reference/control-flow.html#when-expression
 #![forbid(unsafe_code)]
 #![deny(missing_docs)]
@@ -52,7 +52,7 @@
 /// │├──╭── line ──╮──╯── "," ── "_" ── "=>" ── expr ──╰──╯── "," ──╰──┤│
 ///     │          │
 ///     ╰── "," ───╯
-/// 
+///
 /// line:
 ///     ╭─────────────>─────────────╮
 ///     │                           │
