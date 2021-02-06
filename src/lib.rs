@@ -1,46 +1,95 @@
-//! This crate entroduces `when!` macro which provides better syntax for
+//! _("kiam" is "when" in Esperanto)_
+//!
+//! This crate entroduces [`when!`] macro which provides better syntax for
 //! `if`/`else if`/`else` chains. The syntax is similar to `match`.
 //!
 //! (idea is borrowed from [kotlin][kt-when-expr])
 //!
 //! [kt-when-expr]: https://kotlinlang.org/docs/reference/control-flow.html#when-expression
-#![forbid(unsafe_code)]
-#![deny(missing_docs)]
 #![no_std]
+#![forbid(unsafe_code)]
+#![deny(missing_docs, broken_intra_doc_links)]
 
 /// Better syntax for `if`/`else if`/`else` similar to `match` syntax
 ///
-/// ## Examples
+/// ## Usage
 ///
-/// ```
-/// use kiam::when;
+/// Usage is similar to the usage of `match`, but instead of patterns, branches are guarded by boolean expression:
 ///
-/// #[derive(PartialEq)]
-/// struct Struct {
-///     x: i32,
+/// ```rust
+/// kiam::when! {
+///     false => (),
+///     true => (),
+///     // ...
 /// }
+/// ```
 ///
-/// fn cond0() -> bool { false }
+/// `_` can be used as a default branch (it's also required to use `when!` in expression possition):
 ///
-/// let cond1 = true;
-/// let zero = Struct { x: 0 };
-/// let opt = None::<&'static str>;
-///
-/// let res = when! {
-///     cond0() => 0,
-///     // In difference with `if`, struct literals are allowed here
-///     zero == Struct { x: 1 } => 1,
-///     // Pattern matching
-///     let Some(s) = opt => s.len() as _,
-///     cond1 => {
-///         /* blocks are allowed too */
-///         17
-///     },
-///     // Default branch (`else`) (it's optional, unless `when!` is used in expression position)
-///     _ => 42,
+/// ```rust
+/// let x = kiam::when! {
+///     false => 0,
+///     _ => 1,
 /// };
 ///
-/// assert_eq!(res, 17);
+/// assert_eq!(x, 1);
+/// ```
+///
+/// You can also use `let <pat> =` to match a pattern, but in difference with `match` you'll have to provide an expression for every pattern:
+///
+/// ```rust
+/// let a = None;
+/// let b = Some(17);
+/// let fallible = || Err(());
+///
+/// let x = kiam::when! {
+///     let Some(x) = a => x,
+///     let Ok(x) = fallible() => x,
+///     let Some(x) = b => (x as u32) + 1,
+///     _ => 1,
+/// };
+///
+/// assert_eq!(x, 18);
+/// ```
+///
+/// Last notes:
+/// - You can also compare structure litetals without brackets (you can't do thif with `if`/`else if`/`else` chain)
+/// - You can mixup boolean-braches with pattern matching
+/// - Only one branch is executed (not to be confused with `switch` in C-like languages)
+///
+/// ```rust
+/// let mut x = 0;
+///
+/// kiam::when! {
+///     let Ok(_) = Err::<(), _>(()) => x = 1,
+///     true => x = 2,
+///     true => x = 3,
+///     let Some(n) = Some(42) => x = n,
+/// };
+///
+/// assert_eq!(x, 2);
+/// ```
+///
+/// ```compile_fail
+/// #[derive(PartialEq)]
+/// struct Struct { a: i32 }
+///
+/// // This does not compile because of the ambiguity
+/// if Struct { a: 0 } == Struct { a: 0 } {
+///     // ...
+/// }
+/// ```
+///
+/// ```rust
+/// #[derive(PartialEq)]
+/// struct Struct { a: i32 }
+///
+/// kiam::when! {
+///     // This, on the other hand, compiles fine
+///     Struct { a: 0 } == Struct { a: 0 } => {
+///         // ...
+///     },
+/// }
 /// ```
 ///
 /// ## Grammar
