@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="image.png">
+  <img src="image.png" width="66.6%"/>
   <h1>kiam</h1>
 
   <a href="https://github.com/WaffleLapkin/kiam/actions">
