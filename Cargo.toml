@@ -1,8 +1,23 @@
 [package]
 name = "kiam"
+description = "Better syntax for if/else chains (when!)"
 version = "0.1.0"
 authors = ["Waffle <waffle.lapkin@gmail.com>"]
 edition = "2018"
+
+license = "MIT"
+repository = "https://github.com/WaffleLapkin/kiam/"
+homepage = "https://github.com/WaffleLapkin/kiam/"
+documentation = "https://docs.rs/kiam/"
+readme = "README.md"
+
+keywords = ["no_std", "if", "ifelse", "else", "when"]
+categories = ["no-std"]
+
+exclude = [
+    ".github/*",
+    "netlify.toml",
+]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
