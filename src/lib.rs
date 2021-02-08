@@ -110,26 +110,22 @@
 #[macro_export]
 macro_rules! when {
     (
-        $(let $fpat:pat = )? $fcond:expr => $fbranch:expr
         $(
-            , $(let $pat:pat = )? $cond:expr => $branch:expr
-        )*
+            $(let $pat:pat = )? $cond:expr => $branch:expr
+        ),+
         $(, _ => $def_branch:expr)?
         $(,)?
     ) => {
-        if $(let $fpat = )? $fcond {
-            $fbranch
-        }
         $(
-            else if $(let $pat = )? $cond {
+            if $(let $pat = )? $cond {
                 $branch
-            }
-        )*
-        $(
-            else {
+            } else
+        )+
+        {
+            $(
                 $def_branch
-            }
-        )?
+            )?
+        }
     };
 }
 
