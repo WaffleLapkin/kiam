@@ -1,6 +1,6 @@
 //! _("kiam" is "when" in Esperanto)_
 //!
-//! This crate entroduces [`when!`] macro which provides better syntax for
+//! This crate introduces [`when!`] macro which provides better syntax for
 //! `if`/`else if`/`else` chains. The syntax is similar to `match`.
 //!
 //! (idea is borrowed from [kotlin][kt-when-expr])
