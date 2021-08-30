@@ -74,7 +74,7 @@ assert_eq!(x, 18);
 ```
 
 Last notes:
-- You can also compare structure litetals without brackets (you can't do thif with `if`/`else if`/`else` chain)
+- You can also compare structure litetals without brackets (you can't do this with `if`/`else if`/`else` chain)
 - You can mixup boolean-braches with pattern matching
 - Only one branch is executed (not to be confused with `switch` in C-like languages)
 
