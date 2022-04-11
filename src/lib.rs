@@ -24,7 +24,7 @@
 /// }
 /// ```
 ///
-/// `_` can be used as a default branch (it's also required to use `when!` in expression possition):
+/// `_` can be used as a default branch (it's also required to use `when!` in expression position):
 ///
 /// ```rust
 /// let x = kiam::when! {
@@ -53,8 +53,8 @@
 /// ```
 ///
 /// Last notes:
-/// - You can also compare structure litetals without brackets (you can't do this with `if`/`else if`/`else` chain)
-/// - You can mixup boolean-braches with pattern matching
+/// - You can also compare structure literals without brackets (you can't do this with `if`/`else if`/`else` chain)
+/// - You can mixup boolean-branches with pattern matching
 /// - Only one branch is executed (not to be confused with `switch` in C-like languages)
 ///
 /// ```rust
