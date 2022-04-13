@@ -1,7 +1,7 @@
 [package]
 name = "kiam"
 description = "Better syntax for if/else chains (when!)"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Waffle <waffle.lapkin@gmail.com>"]
 edition = "2018"
 
